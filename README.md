@@ -1,16 +1,16 @@
-# [Project Name]
+# Efficientalign Onnx
 
-> [Brief description of the project - one or two sentences]
+> A complete end-to-end pipeline to Fine-tune (QLoRA), Align (DPO/RLHF), and Deploy (ONNX) Large Language Models on consumer hardware. Designed for low resource environments.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub issues](https://img.shields.io/github/issues/devMuniz02/[repo-name])](https://github.com/devMuniz02/[repo-name]/issues)
-[![GitHub stars](https://img.shields.io/github/stars/devMuniz02/[repo-name])](https://github.com/devMuniz02/[repo-name]/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/devMuniz02/EfficientAlign-ONNX)](https://github.com/devMuniz02/EfficientAlign-ONNX/issues)
+[![GitHub stars](https://img.shields.io/github/stars/devMuniz02/EfficientAlign-ONNX)](https://github.com/devMuniz02/EfficientAlign-ONNX/stargazers)
 
 ## 📋 Table of Contents
 
 - [Features](#features)
 - [Installation](#installation)
-- [Repository Setup](#repository-setup)
+- [Project Structure](#project-structure)
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
@@ -19,100 +19,121 @@
 
 ## ✨ Features
 
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
-- [Add more features as needed]
+- **QLoRA Fine-tuning**: Efficient fine-tuning of large language models using Quantized Low-Rank Adaptation
+- **DPO Alignment**: Direct Preference Optimization for aligning model responses with human preferences
+- **ONNX Export**: Convert trained models to ONNX format for optimized inference
+- **Low Resource Optimization**: Designed to run on consumer hardware with ~12GB VRAM
+- **End-to-End Pipeline**: Complete workflow from training to deployment
+- **Hugging Face Integration**: Seamless pushing and loading from Hugging Face Hub
 
 ## 🚀 Installation
 
 ### Prerequisites
 
-- [List prerequisites, e.g., Node.js v16+, Python 3.8+, etc.]
+- Python 3.8+
+- Git
+- Hugging Face account (for pushing models to Hub)
+- ~12GB VRAM GPU recommended (for training)
 
 ### Installation Steps
 
 ```bash
 # Clone the repository
-git clone https://github.com/devMuniz02/[repo-name].git
+git clone https://github.com/devMuniz02/EfficientAlign-ONNX.git
 
 # Navigate to the project directory
-cd [repo-name]
+cd EfficientAlign-ONNX
 
 # Install dependencies
-npm install
-# or
 pip install -r requirements.txt
-# or
-[other installation commands]
 ```
 
-## � Repository Setup
 
-After cloning this template repository, run the setup script to automatically populate the README with your repository information:
-
-### Prerequisites for Setup Script
-- Python 3.6+
-- Git configured with remote origin
-
-### Setup Steps
-```bash
-# Install Python dependencies
-pip install -r requirements.txt
-
-# Run the setup script
-python update_readme.py
-```
-
-This script will:
-- Fetch repository information from GitHub API
-- Update the project name and description in README.md
-- Extract the repository name from the git remote URL
-
-**Note:** Make sure your repository has a remote origin set and is pushed to GitHub before running the script.
-
-## 📁 Project Structure
 
 ```
-[repo-name]/
+EfficientAlign-ONNX/
 ├── assets/                 # Static assets (images, icons, etc.)
 ├── data/                   # Data files and datasets
 ├── docs/                   # Documentation files
-├── notebooks/              # Jupyter notebooks for analysis and prototyping
-├── scripts/                # Utility scripts and automation tools
+├── final_model/            # Trained LoRA adapter model
+├── merged_model/           # Merged base model + adapter
+├── onnx_model/             # Exported ONNX model
+├── notebooks/              # Jupyter notebooks for testing
+├── scripts/                # Utility scripts
 ├── src/                    # Source code
-├── tests/                  # Unit tests and test files
+│   ├── train_dpo.py        # DPO training script
+│   ├── export_and_push_onnx.py  # ONNX export script
+│   ├── push_merged_model.py     # Push merged model to Hub
+│   ├── push_to_hub.py      # Hub utilities
+│   └── test_hf_and_onnx.py # Testing scripts
+├── tests/                  # Unit tests
 ├── LICENSE                 # License file
 ├── README.md               # Project documentation
+├── README_ONNX.md          # ONNX model usage guide
 └── requirements.txt        # Python dependencies
 ```
 
-### Directory Descriptions
+## 📁 Project Structure
 
-- **`assets/`**: Store static files like images, icons, fonts, and other media assets.
-- **`data/`**: Place datasets, input files, and any data-related resources here.
-- **`docs/`**: Additional documentation, guides, and project-related files.
-- **`notebooks/`**: Jupyter notebooks for data exploration, prototyping, and demonstrations.
-- **`scripts/`**: Utility scripts for automation, setup, deployment, or maintenance tasks.
-- **`src/`**: Main source code for the project.
-- **`tests/`**: Unit tests, integration tests, and test-related files.
+- **`assets/`**: Static files like images and media
+- **`data/`**: Datasets and data-related resources
+- **`docs/`**: Additional documentation and guides
+- **`final_model/`**: Trained LoRA adapter with config and tokenizer
+- **`merged_model/`**: Full merged model ready for inference
+- **`onnx_model/`**: ONNX-optimized model for efficient deployment
+- **`notebooks/`**: Jupyter notebooks for testing and demonstrations
+- **`scripts/`**: Utility scripts for automation
+- **`src/`**: Main source code including training and export scripts
+- **`tests/`**: Unit tests and test files
 
-## �📖 Usage
+## 📖 Usage
 
-### Basic Usage
+### Training Pipeline
 
+1. **Fine-tune with DPO**:
 ```bash
-# Example command
-[command example]
+python src/train_dpo.py
 ```
 
-### Advanced Usage
+2. **Merge LoRA adapter with base model**:
+```bash
+python src/push_merged_model.py
+```
 
-[Provide more detailed usage examples, code snippets, or screenshots]
+3. **Export to ONNX**:
+```bash
+python src/export_and_push_onnx.py
+```
+
+### Testing Models
+
+- **Test ONNX model**: Run the notebook `notebooks/testsonnx.ipynb`
+- **Compare HF vs ONNX**: Use `src/test_hf_and_onnx.py`
+
+### Basic Inference with ONNX Model
+
+See [README_ONNX.md](README_ONNX.md) for detailed ONNX inference examples.
 
 ## ⚙️ Configuration
 
-[Explain configuration options, environment variables, config files, etc.]
+### Environment Variables
+
+Create a `.env` file for Hugging Face authentication:
+
+```bash
+HF_TOKEN=your_huggingface_token_here
+```
+
+### Training Configuration
+
+The training script uses the following default settings:
+- Model: `google/gemma-3-1b-it`
+- Dataset: `HuggingFaceH4/ultrafeedback_binarized`
+- LoRA rank: 16
+- Batch size: Configurable in `DPOConfig`
+- Max sequence length: 1024
+
+Modify the scripts in `src/` to adjust parameters for your use case.
 
 ## 🤝 Contributing
 
@@ -127,20 +148,18 @@ Contributions are welcome! Please follow these steps:
 ### Development Setup
 
 ```bash
-# Install development dependencies
-npm install --dev
-# or
-pip install -r requirements-dev.txt
+# Install dependencies
+pip install -r requirements.txt
+
+# For development, also install optional packages
+pip install ipython jupyterlab
 
 # Run tests
-npm test
-# or
-python -m pytest
+python -m pytest tests/
 
-# Run linting
-npm run lint
-# or
-black .
+# Format code
+pip install black
+black src/
 ```
 
 ## 📄 License
@@ -153,7 +172,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Hugging Face:** [https://huggingface.co/manu02](https://huggingface.co/manu02)
 - **Portfolio:** [https://devmuniz02.github.io/](https://devmuniz02.github.io/)
 
-Project Link: [https://github.com/devMuniz02/[repo-name]](https://github.com/devMuniz02/[repo-name])
+Project Link: [https://github.com/devMuniz02/EfficientAlign-ONNX](https://github.com/devMuniz02/EfficientAlign-ONNX)
 
 ---
 
