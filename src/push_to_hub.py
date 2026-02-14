@@ -50,6 +50,7 @@ def push_onnx_to_hub(onnx_output_path: str, base_repo_name: str, token: str, use
 
         # Robust ONNX model card
         onnx_card = f"""---
+base_model: {username}/{base_repo_name}
 language: en
 license: apache-2.0
 tags:

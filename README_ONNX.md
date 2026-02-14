@@ -1,4 +1,5 @@
 ---
+base_model: manu02/gemma-3-1b-it-4bit-lora-dpo-aligned
 language: en
 license: apache-2.0
 tags:

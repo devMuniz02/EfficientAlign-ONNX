@@ -36,6 +36,7 @@ def merge_lora_weights(base_model_path: str, lora_adapter_path: str, output_path
 def create_model_card(model_name: str, base_model: str, training_info: dict):
     """Create a comprehensive model card."""
     card_content = f"""---
+base_model: {base_model}
 language: en
 license: apache-2.0
 tags:

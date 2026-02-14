@@ -1,179 +1,89 @@
-# Efficientalign Onnx
-
-> A complete end-to-end pipeline to Fine-tune (QLoRA), Align (DPO/RLHF), and Deploy (ONNX) Large Language Models on consumer hardware. Designed for low resource environments.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub issues](https://img.shields.io/github/issues/devMuniz02/EfficientAlign-ONNX)](https://github.com/devMuniz02/EfficientAlign-ONNX/issues)
-[![GitHub stars](https://img.shields.io/github/stars/devMuniz02/EfficientAlign-ONNX)](https://github.com/devMuniz02/EfficientAlign-ONNX/stargazers)
-
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
-## ✨ Features
-
-- **QLoRA Fine-tuning**: Efficient fine-tuning of large language models using Quantized Low-Rank Adaptation
-- **DPO Alignment**: Direct Preference Optimization for aligning model responses with human preferences
-- **ONNX Export**: Convert trained models to ONNX format for optimized inference
-- **Low Resource Optimization**: Designed to run on consumer hardware with ~12GB VRAM
-- **End-to-End Pipeline**: Complete workflow from training to deployment
-- **Hugging Face Integration**: Seamless pushing and loading from Hugging Face Hub
-
-## 🚀 Installation
-
-### Prerequisites
-
-- Python 3.8+
-- Git
-- Hugging Face account (for pushing models to Hub)
-- ~12GB VRAM GPU recommended (for training)
-
-### Installation Steps
-
-```bash
-# Clone the repository
-git clone https://github.com/devMuniz02/EfficientAlign-ONNX.git
-
-# Navigate to the project directory
-cd EfficientAlign-ONNX
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-
-
-```
-EfficientAlign-ONNX/
-├── assets/                 # Static assets (images, icons, etc.)
-├── data/                   # Data files and datasets
-├── docs/                   # Documentation files
-├── final_model/            # Trained LoRA adapter model
-├── merged_model/           # Merged base model + adapter
-├── onnx_model/             # Exported ONNX model
-├── notebooks/              # Jupyter notebooks for testing
-├── scripts/                # Utility scripts
-├── src/                    # Source code
-│   ├── train_dpo.py        # DPO training script
-│   ├── export_and_push_onnx.py  # ONNX export script
-│   ├── push_merged_model.py     # Push merged model to Hub
-│   ├── push_to_hub.py      # Hub utilities
-│   └── test_hf_and_onnx.py # Testing scripts
-├── tests/                  # Unit tests
-├── LICENSE                 # License file
-├── README.md               # Project documentation
-├── README_ONNX.md          # ONNX model usage guide
-└── requirements.txt        # Python dependencies
-```
-
-## 📁 Project Structure
-
-- **`assets/`**: Static files like images and media
-- **`data/`**: Datasets and data-related resources
-- **`docs/`**: Additional documentation and guides
-- **`final_model/`**: Trained LoRA adapter with config and tokenizer
-- **`merged_model/`**: Full merged model ready for inference
-- **`onnx_model/`**: ONNX-optimized model for efficient deployment
-- **`notebooks/`**: Jupyter notebooks for testing and demonstrations
-- **`scripts/`**: Utility scripts for automation
-- **`src/`**: Main source code including training and export scripts
-- **`tests/`**: Unit tests and test files
-
-## 📖 Usage
-
-### Training Pipeline
-
-1. **Fine-tune with DPO**:
-```bash
-python src/train_dpo.py
-```
-
-2. **Merge LoRA adapter with base model**:
-```bash
-python src/push_merged_model.py
-```
-
-3. **Export to ONNX**:
-```bash
-python src/export_and_push_onnx.py
-```
-
-### Testing Models
-
-- **Test ONNX model**: Run the notebook `notebooks/testsonnx.ipynb`
-- **Compare HF vs ONNX**: Use `src/test_hf_and_onnx.py`
-
-### Basic Inference with ONNX Model
-
-See [README_ONNX.md](README_ONNX.md) for detailed ONNX inference examples.
-
-## ⚙️ Configuration
-
-### Environment Variables
-
-Create a `.env` file for Hugging Face authentication:
-
-```bash
-HF_TOKEN=your_huggingface_token_here
-```
-
-### Training Configuration
-
-The training script uses the following default settings:
-- Model: `google/gemma-3-1b-it`
-- Dataset: `HuggingFaceH4/ultrafeedback_binarized`
-- LoRA rank: 16
-- Batch size: Configurable in `DPOConfig`
-- Max sequence length: 1024
-
-Modify the scripts in `src/` to adjust parameters for your use case.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Development Setup
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# For development, also install optional packages
-pip install ipython jupyterlab
-
-# Run tests
-python -m pytest tests/
-
-# Format code
-pip install black
-black src/
-```
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-**Links:**
-- **GitHub:** [https://github.com/devMuniz02/](https://github.com/devMuniz02/)
-- **LinkedIn:** [https://www.linkedin.com/in/devmuniz](https://www.linkedin.com/in/devmuniz)
-- **Hugging Face:** [https://huggingface.co/manu02](https://huggingface.co/manu02)
-- **Portfolio:** [https://devmuniz02.github.io/](https://devmuniz02.github.io/)
-
-Project Link: [https://github.com/devMuniz02/EfficientAlign-ONNX](https://github.com/devMuniz02/EfficientAlign-ONNX)
-
+---
+base_model: google/gemma-3-1b-it
+language: en
+license: apache-2.0
+tags:
+- dpo
+- alignment
+- gemma
+- text-generation
+- preference-learning
+datasets:
+- HuggingFaceH4/ultrafeedback_binarized
 ---
 
-⭐ If you find this project helpful, please give it a star!
+# gemma-3-1b-it-4bit-lora-dpo-aligned
+
+This model is a fine-tuned version of [google/gemma-3-1b-it](https://huggingface.co/google/gemma-3-1b-it) using Direct Preference Optimization (DPO) on the ultrafeedback_binarized dataset.
+
+## Training Details
+
+- **Base Model**: google/gemma-3-1b-it
+- **Fine-tuning Method**: DPO (Direct Preference Optimization)
+- **Dataset**: HuggingFaceH4/ultrafeedback_binarized
+- **Training Samples**: 1000
+- **Evaluation Samples**: 100
+- **Epochs**: 1
+- **Batch Size**: 1 (per device)
+- **Gradient Accumulation**: 4
+- **Learning Rate**: 5e-5
+- **Beta (DPO)**: 0.1
+- **Max Length**: 1024
+- **Optimizer**: adamw_8bit
+- **Precision**: bfloat16
+- **Quantization**: 4-bit NF4 (during training)
+- **LoRA Rank**: 16
+- **LoRA Alpha**: 32
+- **Target Modules**: q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj
+
+## Memory Optimizations
+
+- Gradient Checkpointing
+- 8-bit AdamW Optimizer
+- Pre-computed Reference Log Probabilities
+- LoRA Parameter-Efficient Fine-tuning
+
+## Intended Use
+
+This model is intended for text generation tasks with improved alignment through DPO training. It maintains the capabilities of the base Gemma 3 model while being better aligned with human preferences.
+
+## Usage
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_name = "gemma-3-1b-it-4bit-lora-dpo-aligned"
+model = AutoModelForCausalLM.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+# Example inference
+prompt = "Explain quantum computing in simple terms."
+inputs = tokenizer(prompt, return_tensors="pt")
+outputs = model.generate(**inputs, max_length=200)
+response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+```
+
+## Limitations
+
+- This model inherits limitations from the base Gemma 3 model
+- DPO alignment may not cover all edge cases or preferences
+- Performance may vary on different hardware configurations
+
+## Citation
+
+If you use this model, please cite the original Gemma model and the DPO paper:
+
+```
+@misc{gemma3,
+  title={Gemma 3},
+  author={Google DeepMind},
+  year={2026}
+}
+
+@article{rafailov2023direct,
+  title={Direct Preference Optimization: Your Language Model is Secretly a Reward Model},
+  author={Rafailov, Rafael and Sharma, Archit and Mitchell, Eric and Manning, Christopher D and Finn, Chelsea and Ermon, Stefano},
+  journal={arXiv preprint arXiv:2305.18290},
+  year={2023}
+}
+```
