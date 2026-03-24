@@ -1,0 +1,32 @@
+# Core ML libraries
+--pre
+--extra-index-url https://download.pytorch.org/whl/cu130
+
+torch
+torchvision
+# transformers
+peft
+bitsandbytes
+trl
+datasets
+accelerate
+
+# ONNX export
+transformers[onnx]
+onnxruntime
+
+# Utilities
+tqdm
+rich
+python-dotenv
+pillow
+
+# Natural Language Processing
+# transformers
+# datasets
+# tokenizers
+
+# Development Tools
+# ipython
+# jupyterlab
+# sphinx
