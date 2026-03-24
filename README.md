@@ -13,6 +13,10 @@ This model is a fine-tuned version of [google/gemma-3-1b-it](https://huggingface
 
 A complete end-to-end pipeline to Fine-tune (QLoRA), Align (DPO/RLHF), and Deploy (ONNX) Large Language Models on consumer hardware. Designed for low resource environments.
 
+![EfficientAlign ONNX pipeline overview](assets/pipeline-overview.png)
+
+End-to-end pipeline for fine-tuning, alignment, and ONNX deployment.
+
 ## Repository Structure
 
 | Path | Description |
@@ -45,6 +49,11 @@ pip install -r requirements.txt
 3. Run or inspect the project entry point.
 
 Use the project-specific scripts or notebooks in the repository root to run the workflow.
+
+Generate the README visual:
+```bash
+python scripts/generate_readme_visual.py
+```
 
 ## Usage
 

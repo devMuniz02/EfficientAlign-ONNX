@@ -19,6 +19,7 @@ onnxruntime
 tqdm
 rich
 python-dotenv
+pillow
 
 # Natural Language Processing
 # transformers
